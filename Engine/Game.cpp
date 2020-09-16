@@ -50,6 +50,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
+
 	goal.UpdateColor();
 	if( isStarted && !isGameOver )
 	{
@@ -28448,4 +28450,5 @@ void Game::ComposeFrame()
 		}
 		meter.Draw( gfx );
 	}
+
 }
