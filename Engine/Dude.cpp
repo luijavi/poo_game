@@ -349,33 +349,34 @@ void Dude::Draw( Graphics& gfx ) const
 
 void Dude::Update( const Keyboard & kbd, float dt )
 {
+	Vec2 vel(0.0f, 0.0f);
 	if( kbd.KeyIsPressed( VK_RIGHT ) )
 	{
-		position.x += speed * dt;
+		vel.x += 1.0f;
 	}
 	if( kbd.KeyIsPressed( VK_LEFT ) )
 	{
-		position.x -= speed * dt;
+		vel.x -= 1.0f;
 	}
 	if( kbd.KeyIsPressed( VK_DOWN ) )
 	{
-		position.y += speed * dt;
+		vel.y += 1.0f;
 	}
 	if( kbd.KeyIsPressed( VK_UP ) )
 	{
-		position.y -= speed * dt;
+		vel.y -= 1.0f;
 	}
+	position += vel.GetNormalized() * speed * dt;
 }
 
-void Dude::Update(const Mouse& mouse)
+void Dude::Update(const Mouse& mouse, float dt)
 {
-	if (mouse.LeftIsPressed() && mouse.IsInWindow())
+	if (mouse.LeftIsPressed())
 	{
-		Vec2 mousePosVec(float(mouse.GetPosX()), float(mouse.GetPosY()));
-
-		auto deltaPos = mousePosVec - position;
-
-		position += deltaPos.Normalize();
+		const Vec2 mousePosition(float(mouse.GetPosX()), float(mouse.GetPosY()));
+		const Vec2 center = position + Vec2(float(width) / 2.0f, float(height) / 2.0f);
+		const auto deltaPos = mousePosition - center;
+		position += deltaPos.GetNormalized() * speed * dt;
 	}
 }
 

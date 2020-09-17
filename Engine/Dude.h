@@ -11,13 +11,13 @@ public:
 	void ClampToScreen();
 	void Draw( Graphics& gfx ) const;
 	void Update( const Keyboard& kbd, float dt );
-	void Update(const Mouse& mouse);
+	void Update(const Mouse& mouse, float dt);
 	Vec2 GetPosition() const;
 	float GetWidth() const;
 	float GetHeight() const;
 private:
 	Vec2 position = Vec2(400.0f, 300.0f);
-	static constexpr float speed = 1.0f * 60.0f;
+	static constexpr float speed = 1.0f * 180.0f;
 	static constexpr float width = 20.0f;
 	static constexpr float height = 20.0f;
 };
